@@ -1,66 +1,48 @@
-#include <iostream>
+https://leetcode.com/problems/reformat-date/
 
-using namespace std;
 
-int main()
-{
-    string diena, menuo;
-    int metai, d, m, klaidadiena = 0, klaidamenuo = 0;
-    string dienos[] = {"1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th", "20th", "21st", "22nd", "23rd", "24th", "25th", "26th", "27th", "28th", "29th", "30th", "31st"};
-    string menesiai[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
-    cout << "Iveskite dienos skaiciu (pvz.: 20th): "; cin >> diena;
-    for (int i=0; i<=30; i++)
-    if (diena == dienos[i])
-    {
-    cout << "Iveskite menesio sutrumpinta pavadinima (pvz.: Oct): "; cin >> menuo;
-    for (int i=0; i<=11; i++)
-    if (menuo == menesiai[i])
-    {
-    cout << "Iveskite metu skaiciu (pvz.: 2052): "; cin >> metai;
-    if (metai < 1900)
-    {
-        cout << "Rasykite naujesne data nei 1900." << endl;
-    }
-    else if (metai > 2100)
-    {klaidadiena = klaidadiena + 1;
-        if (klaidadiena == 31)
-        {
-            cout << "Klaidingai ivesta diena." << endl;
-        }
-        cout << "Rasykite senesne data nei 2100." << endl;
-    }
-    else
-    {
-        for (int i=0; i<=30; i++)
-            if (diena == dienos[i])
-            {
-                d = i + 1;
-            }
-        for (int i=0; i<=11; i++)
-            if (menuo == menesiai[i])
-            {
-                m = i + 1;
-            }
-    cout << " " << endl;
-    cout << "Irasyta data skaiciais: " << metai << "-" << m << "-" << d << endl;
-    }
-    }
-    else
-    {
-        klaidamenuo = klaidamenuo + 1;
-        if (klaidamenuo == 12)
-        {
-            cout << "Klaidingai ivestas menuo." << endl;
-        }
-    }
-    }
-    else
-    {
-        klaidadiena = klaidadiena + 1;
-        if (klaidadiena == 31)
-        {
-            cout << "Klaidingai ivesta diena." << endl;
-        }
-    }
-    return 0;
-}
+
+		PROBLEMA.
+
+Įvedus datą tokiu formatu: 20th Oct 2052. Ją pakeisti tokiu formatu: 2052-10-20
+Metų ribos nuo 1900 iki 2100.
+
+
+
+		ANALIZĖ.
+
+Įvestis yra diena (20th formatu), mėnuo (Oct formatu) ir metai (2052 formatu).
+Dienos ir mėnesio kintamųjų išsaugojimui naudosime string, kadangi tie du kintamieji yra tekstinio formato.
+Duomenys, kurie bus naudojami:
+
+	1. Diena (Pvz.: 20th).
+	2. Mėnuo (Pvz.: Oct).
+	3. Metai (Pvz.: 2052).
+
+
+
+		FORMULĖS.
+
+	1. d = i + 1   (Cikle for tikrinu, kuri įvestis atitinka masyvę esantį elementą ir pridedu vienetą. Taip nustatau, kelintas tai skaičius masyve. Jis atitinka įvestos dienos skaičių.)
+
+	2. m = i + 1   (Cikle for tikrinu, kuri įvestis atitinka masyvę esantį elementą ir pridedu vienetą. Taip nustatau, kelintas tai skaičius masyve. Jis atitinka įvesto mėnesio skaičių.)
+
+	3. klaidamenuo = klaidamenuo + 1   (Cikle for tikrinu ar įvestas mėnuo yra mėnesių masyve. Jei ne, pridedu vienetą ir paskui tikrinu ar galutinis rezultatas yra 12. Jei taip, tai įvesto mėnesio masyve nėra arba jis įvestas su klaida.)
+
+	4. klaidadiena = klaidadiena + 1   (Cikle for tikrinu ar įvesta diena yra dienų masyve. Jei ne, pridedu vienetą ir paskui tikrinu ar galutinis rezultatas yra 31. Jei taip, tai įvestos dienos masyve nėra arba ji įvesta su klaida.)
+
+
+
+		ALGORITMO KONSTRAVIMAS/PROJEKTAVIMAS.
+
+	1. Sukuriu dienų masyvą.
+	2. Sukuriu mėnesių masyvą.
+	3. Prašau dienos įvesties į programą.
+	4. Tikrinu ar diena yra masyve.
+	5. Prašau mėnesio įvesties į programą.
+	6. Tikrinu ar mėnuo yra masyve.
+	7. Prašau metų įvesties į programą.
+	8. Tikrinu ar metai patenka į nustatytas ribas.
+	9. Naudodamas ciklą nustatau, kuri įvesta diena atitinką, kurią dieną masyve.
+	10. Naudodamas ciklą nustatau, kuris įvestas mėnuo atitinką, kurį mėnesį masyve.
+	11. Jei viskas gerai įvesta, tai ekrane parodo norimą datos formatą: YYYY-MM-DD
